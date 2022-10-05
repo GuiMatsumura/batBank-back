@@ -7,10 +7,10 @@ export async function insertUser(user: ISignUpUser) {
   });
 }
 
-export async function findUserByEmail(user: ISignUpUser) {
+export async function findUserByEmail(email: string) {
   return prisma.users.findUnique({
     where: {
-      email: user.email.toString(),
+      email,
     },
   });
 }
