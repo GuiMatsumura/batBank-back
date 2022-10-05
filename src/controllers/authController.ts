@@ -21,5 +21,5 @@ export async function signIn(req: Request, res: Response) {
   const user = req.body;
   const token = await login(user);
 
-  res.send({ token });
+  res.status(200).send(token);
 }
