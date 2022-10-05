@@ -1,9 +1,14 @@
 export interface ISignUpUser {
-  name: String;
-  email: String;
-  password: String;
-  pictureUrl: String;
-  bankNumber: Number;
+  name: string;
+  email: string;
+  password: string;
+  pictureUrl: string;
+  bankNumber: number;
 }
 
 export type UserOmitBankNumber = Omit<ISignUpUser, 'bankNumber'>;
+
+export interface ISignInUser {
+  email: string;
+  password: string;
+}
