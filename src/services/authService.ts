@@ -1,6 +1,14 @@
 import bcrypt from 'bcrypt';
-import { findUserByEmail, insertUser } from '../repositories/authRepository';
-import { conflictError, unauthorizedError } from '../utils/errorUtils';
+import {
+  findUserByEmail,
+  insertUser,
+  findById,
+} from '../repositories/authRepository';
+import {
+  conflictError,
+  notFoundError,
+  unauthorizedError,
+} from '../utils/errorUtils';
 import { ISignUpUser, ISignInUser } from '../types/userType';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -37,6 +45,14 @@ async function getUserOrFail(login: ISignInUser) {
 
   const isPasswordValid = bcrypt.compareSync(login.password, user.password);
   if (!isPasswordValid) throw unauthorizedError('Invalid credentials');
+
+  return user;
+}
+
+export async function findUserById(id: number) {
+  const user = await findById(id);
+
+  if (!user) throw notFoundError('User not found');
 
   return user;
 }
