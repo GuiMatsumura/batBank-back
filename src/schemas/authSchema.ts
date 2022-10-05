@@ -7,3 +7,8 @@ export const signUpSchema = joi.object<UserOmitBankNumber>({
   password: joi.string().min(3).required(),
   pictureUrl: joi.string().required(),
 });
+
+export const signInSchema = joi.object({
+  email: joi.string().email().required(),
+  password: joi.string().min(3).required(),
+});
