@@ -1,10 +1,14 @@
 import bcrypt from 'bcrypt';
 import { findUserByEmail, insertUser } from '../repositories/authRepository';
-import { conflictError } from '../utils/errorUtils';
-import { ISignUpUser } from '../types/userType';
+import { conflictError, unauthorizedError } from '../utils/errorUtils';
+import { ISignUpUser, ISignInUser } from '../types/userType';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export async function createUser(user: ISignUpUser) {
-  const existingUser = await findUserByEmail(user);
+  const existingUser = await findUserByEmail(user.email);
 
   if (existingUser) {
     throw conflictError('Usuário já existe!');
@@ -18,4 +22,21 @@ export async function createUser(user: ISignUpUser) {
 
 export function generateBankNumber() {
   return Math.floor(Math.random() * 99999) + 10000;
+}
+
+export async function login(login: ISignInUser) {
+  const user = await getUserOrFail(login);
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+
+  return token;
+}
+
+async function getUserOrFail(login: ISignInUser) {
+  const user = await findUserByEmail(login.email);
+  if (!user) throw unauthorizedError('Invalid credentials');
+
+  const isPasswordValid = bcrypt.compareSync(login.password, user.password);
+  if (!isPasswordValid) throw unauthorizedError('Invalid credentials');
+
+  return user;
 }
