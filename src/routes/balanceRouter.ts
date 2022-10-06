@@ -8,7 +8,7 @@ import {
 import { ensureAuthenticatedMiddleware } from '../middlewares/ensureAuthenticatedMiddleware';
 import { ensureTransferUser } from '../middlewares/ensureTransferUser';
 import { validateSchemaMiddleware } from '../middlewares/validateSchemaMiddleware';
-import { transactionSchema } from '../schemas/balanceSchema';
+import { transactionSchema, transferSchema } from '../schemas/balanceSchema';
 
 const balanceRouter = Router();
 
@@ -20,6 +20,11 @@ balanceRouter.post(
   validateSchemaMiddleware(transactionSchema),
   postTransaction
 );
-balanceRouter.post('/transfer', ensureTransferUser, postTransfer);
+balanceRouter.post(
+  '/transfer',
+  validateSchemaMiddleware(transferSchema),
+  ensureTransferUser,
+  postTransfer
+);
 
 export default balanceRouter;
