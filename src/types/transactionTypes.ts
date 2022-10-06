@@ -10,3 +10,7 @@ export interface ITransactionInput {
   amount: number;
   description: string;
 }
+
+export interface ITransferInput extends ITransactionInput {
+  email: string;
+}
