@@ -1,4 +1,8 @@
-import { getTransactionsById } from '../repositories/balanceRepository';
+import {
+  getTransactionsById,
+  insertTransaction,
+} from '../repositories/balanceRepository';
+import { ITransactions } from '../types/transactionTypes';
 
 export async function getBalanceService(id: number) {
   const transactions = await getTransactionsById(id);
@@ -27,4 +31,8 @@ export async function getTransactionsAndBalance(id: number) {
   const data = { balance, transactions };
 
   return data;
+}
+
+export async function createTransaction(transaction: ITransactions) {
+  return await insertTransaction(transaction);
 }
