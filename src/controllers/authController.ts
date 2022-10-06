@@ -9,7 +9,7 @@ export async function signUp(req: Request, res: Response) {
     email,
     password,
     pictureUrl,
-    bankNumber: generateBankNumber(),
+    bankNumber: generateBankNumber().toString(),
   };
 
   await createUser(user);
