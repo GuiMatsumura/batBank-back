@@ -9,6 +9,7 @@ export interface ITransactions {
 export interface ITransactionInput {
   amount: number;
   description: string;
+  type: string;
 }
 
 export interface ITransferInput extends ITransactionInput {
