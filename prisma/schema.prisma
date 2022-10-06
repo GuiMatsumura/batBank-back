@@ -8,13 +8,13 @@ datasource db {
 }
 
 model transactions {
-  id          Int      @id(map: "transactions_pk") @default(autoincrement())
+  id          Int    @id(map: "transactions_pk") @default(autoincrement())
   description String
   type        String
   amount      Int
-  date        DateTime @db.Timestamp(6)
+  date        String
   userId      Int
-  users       users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transactions_fk0")
+  users       users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transactions_fk0")
 }
 
 model users {
