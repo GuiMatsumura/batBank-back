@@ -3,7 +3,7 @@ export interface ISignUpUser {
   email: string;
   password: string;
   pictureUrl: string;
-  bankNumber: number;
+  bankNumber: string;
 }
 
 export type UserOmitBankNumber = Omit<ISignUpUser, 'bankNumber'>;
