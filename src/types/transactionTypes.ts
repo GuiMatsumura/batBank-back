@@ -5,3 +5,8 @@ export interface ITransactions {
   date: string;
   userId: number;
 }
+
+export interface ITransactionInput {
+  amount: number;
+  description: string;
+}
