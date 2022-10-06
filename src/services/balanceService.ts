@@ -19,3 +19,12 @@ async function calculateBalance(transactions: any) {
   }
   return balance;
 }
+
+export async function getTransactionsAndBalance(id: number) {
+  const balance = await getBalanceService(id);
+  const transactions = await getTransactionsById(id);
+
+  const data = { balance, transactions };
+
+  return data;
+}
