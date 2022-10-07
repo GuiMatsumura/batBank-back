@@ -12,3 +12,7 @@ export interface ISignInUser {
   email: string;
   password: string;
 }
+
+export interface IPutPictureUrl {
+  pictureUrl: string;
+}
