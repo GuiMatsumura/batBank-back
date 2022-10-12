@@ -28,9 +28,9 @@ model users {
 }
 
 model support {
-  id      Int      @id(map: "support_pk") @default(autoincrement())
+  id      Int    @id(map: "support_pk") @default(autoincrement())
   message String
-  date    DateTime @db.Timestamp(6)
+  date    String
   userId  Int
   email   String
 }
