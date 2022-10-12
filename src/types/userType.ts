@@ -23,3 +23,8 @@ export interface IHelpBody {
   userId: number;
   email: string;
 }
+
+export interface IHelpSchema {
+  message: string;
+  email: string;
+}
