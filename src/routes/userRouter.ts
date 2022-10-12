@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { putPictureUrl, getUser } from '../controllers/userController';
+import {
+  putPictureUrl,
+  getUser,
+  postHelp,
+} from '../controllers/userController';
 import { ensureAuthenticatedMiddleware } from '../middlewares/ensureAuthenticatedMiddleware';
 import { validateSchemaMiddleware } from '../middlewares/validateSchemaMiddleware';
-import { putPictureUrlSchema } from '../schemas/userSchema';
+import { putPictureUrlSchema, insertHelpSchema } from '../schemas/userSchema';
 
 const userRouter = Router();
 
@@ -13,5 +17,6 @@ userRouter.put(
   putPictureUrl
 );
 userRouter.get('/profile', getUser);
+userRouter.post('/help', validateSchemaMiddleware(insertHelpSchema), postHelp);
 
 export default userRouter;
