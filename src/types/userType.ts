@@ -16,3 +16,10 @@ export interface ISignInUser {
 export interface IPutPictureUrl {
   pictureUrl: string;
 }
+
+export interface IHelpBody {
+  message: string;
+  date: string;
+  userId: number;
+  email: string;
+}
