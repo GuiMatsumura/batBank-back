@@ -26,3 +26,11 @@ model users {
   bankNumber   String         @unique
   transactions transactions[]
 }
+
+model support {
+  id      Int      @id(map: "support_pk") @default(autoincrement())
+  message String
+  date    DateTime @db.Timestamp(6)
+  userId  Int
+  email   BigInt
+}
