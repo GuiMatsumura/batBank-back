@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { putPictureUrlService, insertHelp } from '../services/userService';
 import { createTimestamp } from '../utils/logicUtils';
+import { sendMail } from '../../nodemailer/transporter';
 
 export async function putPictureUrl(req: Request, res: Response) {
   const { user } = res.locals;
@@ -32,6 +33,8 @@ export async function postHelp(req: Request, res: Response) {
     userId: user.id,
     email,
   };
+
+  sendMail(email, date, message);
 
   await insertHelp(helpBody);
 
